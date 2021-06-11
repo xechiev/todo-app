@@ -9,13 +9,28 @@ import Footer from './footer';
 
 class App extends Component {
 
+   maxId = 1;
+
    state = {
       todoData : [
-         {label: 'Complated task', important: false, id: 1},
-         {label: 'Editing task', important: true, id: 2},
-         {label: 'Active task', important: false, id: 3}
-      ]
+         this.createTodoItem('Complated task'),
+         this.createTodoItem('Editing task'),
+         this.createTodoItem('Active task')
+      ],
+      checkedListAll: [],
+      itemsCheked: false
    };
+
+   createTodoItem(label) {
+      return {
+         label,
+         // important: false,
+         done: false,
+         id: this.maxId++,
+         checked: false,
+         view: true
+      }
+   }
 
    deleteItem = (id) => {
       this.setState(({ todoData }) => {
@@ -32,34 +47,54 @@ class App extends Component {
       });
    };
    
-   // onItemAdded = (text) => {
-   //    const newItem = {
-   //       label: text,
-   //       important: false,
-   //       id: this.maxId++
-   //    };
+   addItems = (text) => {
+      const newItem = this.createTodoItem(text);
 
-   //    this.setState(({ todoData }) => {
-   //       const newArr = [
-   //          ...todoData,
-   //          newItem
-   //       ];
+      this.setState(({ todoData }) => {
+         const newArr = [
+            ...todoData,
+            newItem
+         ];
 
-   //       return {
-   //          todoData: newArr
-   //       }         
-   //    });
-   // }
+         return {
+            todoData: newArr
+         }         
+      });
+   }
+
+   toggleProperty (arr, id, propName) {
+      const idx = arr.findIndex((el) => el.id === id);
+
+      const oldItem = arr[idx];
+      const newItem = {...oldItem, 
+         [propName]: !oldItem[propName]};
+
+      return [
+         ...arr.slice(0, idx), 
+         newItem,
+         ...arr.slice(idx + 1)
+      ];
+   }
+
+   onToggleDone = (id) => {
+      this.setState(({ todoData }) => {
+         return {
+            todoData: this.toggleProperty(todoData, id, 'done')
+         };
+      });
+   };
 
    render() {
       return (
          <section className="todoapp">
             <Header />
-            <NewTaskForm />
+            <NewTaskForm addItems={this.addItems}/>
             <TaskList 
                todos={this.state.todoData}
-               onDeleted={ this.deleteItem }/>
-            <Footer />
+               onDeleted={ this.deleteItem }
+               onToggleDone={this.onToggleDone}
+            />
+            <Footer activeView={this.activeView}/>
          </section>
       );
    }

@@ -2,7 +2,7 @@ import React from 'react';
 import Task from '../task';
 import './task-list.css';
 
-const TaskList = ( {todos, onDeleted} ) => {
+const TaskList = ( {todos, onDeleted, onToggleDone} ) => {
 
    const elements = todos.map((item) => {
       const { id, ...itemProps } = item;
@@ -10,7 +10,9 @@ const TaskList = ( {todos, onDeleted} ) => {
          <li key={id} > 
             <Task  
                {... itemProps }
-               onDeleted={() => onDeleted(id)}/>
+               onDeleted={() => onDeleted(id)}
+               onToggleDone={() => onToggleDone(id)}
+               />
          </li>
       );
    })

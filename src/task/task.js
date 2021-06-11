@@ -1,41 +1,27 @@
 import React, { Component } from 'react';
 
-//import TaskFilter from '../task-filter';
-//import { format } from 'date-fns'
 import './task.css';
 
 
 
 export default class Task extends Component {
 
-   state = {
-      done: false
-   };
+   render() {
+      
+      const { label, onDeleted, onToggleDone, done } = this.props;
 
-   onLabeleClick = () => {
-      this.setState(({done}) => {
-         return {
-            done: !done
-         }
-      })
-   };
-   
-    render() {
-      const { label, onDeleted } = this.props;
-      const { done } = this.state;
+      let className = 'description';
 
-      let classNames = 'description"';
-      if (done) {
-         classNames += ' done';
-      }
+      if (done) { className += ' done' }
       
       return (
          <div className='view'>
-            <input className="toggle" type="checkbox" />
+            <input className="toggle" 
+                   type="checkbox" 
+                   onClick={ onToggleDone }/>
             <label>
-               <span className={classNames}
-                     onClick={ this.onLabeleClick }> 
-                     { label } 
+               <span className={className}> 
+                  { label } 
                </span>
                <span className="created">created 5 minute ago</span>
             </label>
@@ -45,3 +31,4 @@ export default class Task extends Component {
       );
    };
 };
+
