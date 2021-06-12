@@ -16,6 +16,9 @@ li {
 li:last-child {
 	border-bottom: none;
 }
+.active {
+	display: none;
+} 
 .toggle-all {
 	width: 1px;
 	height: 1px;

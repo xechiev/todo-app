@@ -10,7 +10,7 @@ import Footer from './footer';
 class App extends Component {
 
    maxId = 1;
-
+   
    state = {
       todoData : [
          this.createTodoItem('Complated task'),
@@ -28,7 +28,7 @@ class App extends Component {
          done: false,
          id: this.maxId++,
          checked: false,
-         view: true
+         view: false
       }
    }
 
@@ -84,6 +84,29 @@ class App extends Component {
       });
    };
 
+   toggleFilter (arr, mark)  {
+      const newArr = arr
+         for(let item of newArr) {
+            if(item.done === mark) item.view = !item.view
+         }
+         return {
+            arr: newArr
+         }
+   }
+
+   onToggleActive = () => {      
+      this.setState(({ todoData }) => {
+         return this.toggleFilter(todoData, true)
+      })
+   }
+
+   onToggleCompleted = () => {      
+      this.setState(({ todoData }) => {
+         return this.toggleFilter(todoData, false)
+      })
+   }
+   
+    
    render() {
       return (
          <section className="todoapp">
@@ -94,7 +117,11 @@ class App extends Component {
                onDeleted={ this.deleteItem }
                onToggleDone={this.onToggleDone}
             />
-            <Footer activeView={this.activeView}/>
+            <Footer 
+               onToggleActive={this.onToggleActive}
+               onToggleCompleted={this.onToggleCompleted}
+               todos={this.state.todoData}
+            />
          </section>
       );
    }
