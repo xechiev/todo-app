@@ -44,6 +44,9 @@ label {
 	text-decoration: line-through;
 	color: #cdcdcd;
 }
+.active {
+	display: none;
+} 
 
 .icon {
 	position: absolute;
@@ -77,10 +80,3 @@ label {
 	content: '✎';
 }
 
-.edit {
-	display: none;
-}
-
-.editing:last-child {
-	margin-bottom: -1px;
-}

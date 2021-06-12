@@ -24,7 +24,6 @@ class App extends Component {
    createTodoItem(label) {
       return {
          label,
-         // important: false,
          done: false,
          id: this.maxId++,
          checked: false,
@@ -96,26 +95,31 @@ class App extends Component {
 
    onToggleAll = () => {
       this.setState(({ todoData }) => {
-         const newArr = todoData
-         for(let item of newArr) {
-            if(item.done || !item.done) item.view = !item.view || item.view
-         }
+         const allItem = todoData.filter((el) => el.label);
          return {
-         todoData: newArr
+            todoData: allItem
          }
       })
-      
    }
 
    onToggleActive = () => {      
-      this.setState( state  => {
-         return this.toggleFilter(state.todoData, true)
+      this.setState(({ todoData }) => {
+         return this.toggleFilter(todoData, true)
       })
    }
 
    onToggleCompleted = () => {      
       this.setState(({ todoData }) => {
          return this.toggleFilter(todoData, false)
+      })
+   }
+
+   onClearCompleted = () => {
+      this.setState(({ todoData }) => {
+         const clearCompl = todoData.filter((el) => !el.done);
+         return {
+            todoData: clearCompl
+         }
       })
    }
    
@@ -134,6 +138,7 @@ class App extends Component {
                onToggleAll={this.onToggleAll}
                onToggleActive={this.onToggleActive}
                onToggleCompleted={this.onToggleCompleted}
+               onClearCompleted={this.onClearCompleted}
                todos={this.state.todoData}
             />
          </section>

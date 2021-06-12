@@ -15,9 +15,9 @@ export default class Task extends Component {
 
       if (done) { className += ' done' }
       if (view) {classActive += ' active'}
-      
+      classActive += ' all'
       return (
-         <div className={classActive}>
+         <div className={classActive} >
             <input className="toggle" 
                    type="checkbox" 
                    onClick={onToggleDone}/>
