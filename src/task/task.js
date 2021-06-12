@@ -15,6 +15,7 @@ export default class Task extends Component {
 
       if (done) { className += ' done' }
       if (view) {classActive += ' active'}
+      
       return (
          <div className={classActive}>
             <input className="toggle" 

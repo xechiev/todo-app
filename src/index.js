@@ -84,19 +84,32 @@ class App extends Component {
       });
    };
 
-   toggleFilter (arr, mark)  {
+   toggleFilter (arr, status)  {
       const newArr = arr
          for(let item of newArr) {
-            if(item.done === mark) item.view = !item.view
+            if(item.done === status) item.view = !item.view
          }
          return {
             arr: newArr
          }
    }
 
-   onToggleActive = () => {      
+   onToggleAll = () => {
       this.setState(({ todoData }) => {
-         return this.toggleFilter(todoData, true)
+         const newArr = todoData
+         for(let item of newArr) {
+            if(item.done || !item.done) item.view = !item.view || item.view
+         }
+         return {
+         todoData: newArr
+         }
+      })
+      
+   }
+
+   onToggleActive = () => {      
+      this.setState( state  => {
+         return this.toggleFilter(state.todoData, true)
       })
    }
 
@@ -118,6 +131,7 @@ class App extends Component {
                onToggleDone={this.onToggleDone}
             />
             <Footer 
+               onToggleAll={this.onToggleAll}
                onToggleActive={this.onToggleActive}
                onToggleCompleted={this.onToggleCompleted}
                todos={this.state.todoData}

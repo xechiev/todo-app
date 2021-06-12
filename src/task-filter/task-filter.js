@@ -9,7 +9,7 @@ export default class TaskFilter extends Component{
 
       return (
          <ul className="filters">
-            <li><button type="checkbox" onClick={onToggleAll}>All</button></li>
+            <li><button onClick={onToggleAll}>All</button></li>
             <li><button onClick={onToggleActive}>Active</button></li>
             <li><button onClick={onToggleCompleted}>Completed</button></li>
          </ul>
