@@ -39,6 +39,11 @@ label {
 	font-weight: 400;
 	color: #4d4d4d;
 	cursor: pointer;
+	padding: 0;
+	border: none;
+	font: inherit;
+	color: inherit;
+	background-color: transparent;
 }
 .done {
 	text-decoration: line-through;

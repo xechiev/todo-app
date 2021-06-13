@@ -5,7 +5,7 @@ export default class TaskFilter extends Component{
    
    render() {
 
-      const { onToggleActive, onToggleCompleted, onToggleAll } = this.props;
+      const { onToggleActive, onToggleCompleted, onToggleAll} = this.props;
 
       return (
          <ul className="filters">

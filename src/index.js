@@ -27,7 +27,8 @@ class App extends Component {
          done: false,
          id: this.maxId++,
          checked: false,
-         view: false
+         view: false,
+         timeCreate: Date.now(),
       }
    }
 
@@ -113,6 +114,12 @@ class App extends Component {
          return this.toggleFilter(todoData, false)
       })
    }
+   
+   // onToggleFilter = (onToggleAll, onToggleActive, onToggleCompleted) => {
+   //    this.setState(( { todoData }) => {
+   //       if(onToggleActive)
+   //    })
+   // }
 
    onClearCompleted = () => {
       this.setState(({ todoData }) => {
@@ -122,7 +129,9 @@ class App extends Component {
          }
       })
    }
-   
+   onChangeItem = () => {
+      console.log("hello")
+   }
     
    render() {
       return (
@@ -133,6 +142,7 @@ class App extends Component {
                todos={this.state.todoData}
                onDeleted={ this.deleteItem }
                onToggleDone={this.onToggleDone}
+               onChangeItem={this.onChangeItem}
             />
             <Footer 
                onToggleAll={this.onToggleAll}
