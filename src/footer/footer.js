@@ -8,13 +8,13 @@ export default class Footer extends Component {
 
    static propTypes = {
       todos: PropTypes.arrayOf(PropTypes.object).isRequired,
-      Itemfilter: PropTypes.arrayOf(PropTypes.object),
+      itemFilter: PropTypes.arrayOf(PropTypes.string),
       onClearCompleted: PropTypes.func.isRequired,
       onfilterTodos: PropTypes.func.isRequired,
    }
 
    render() {
-      const { todos, Itemfilter, onClearCompleted, onfilterTodos} = this.props
+      const { todos, itemFilter, onClearCompleted, onfilterTodos} = this.props
 
       const doneCount = todos.filter((el) => !el.done).length;
 
@@ -23,7 +23,7 @@ export default class Footer extends Component {
             <span className="todo-count">{doneCount} items left</span>
             <TaskFilter 
                onfilterTodos={onfilterTodos}
-               Itemfilter={Itemfilter}
+               itemFilter={itemFilter}
             />
             <button 
                className="clear-completed"

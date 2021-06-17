@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './task-filter.css';
- const TaskFilter = ({ Itemfilter, onfilterTodos }) => {
+ const TaskFilter = ({ itemFilter, onfilterTodos }) => {
 
-   const allItem = Itemfilter === "all" ? "selected" : "";
-   const activeItem = Itemfilter === "active" ? "selected" : "";
-   const completedItem = Itemfilter === "completed" ? "selected" : "";
+   const allItem = itemFilter === "all" ? "selected" : "";
+   const activeItem = itemFilter === "active" ? "selected" : "";
+   const completedItem = itemFilter === "completed" ? "selected" : "";
 
    const onFilter = (e) => {
       const innerText = e.target.innerText.toLowerCase();
@@ -23,11 +23,11 @@ import './task-filter.css';
 };
 
 TaskFilter.defaultProps = {
-   Itemfilter: 'all'
+   itemFilter: 'all'
 }
 
 TaskFilter.propTypes = {
-   Itemfilter: PropTypes.oneOf(["all", "active", "completed"]),
+   itemFilter: PropTypes.oneOf(["all", "active", "completed"]),
    onfilterTodos: PropTypes.func.isRequired
 }
 

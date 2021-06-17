@@ -12,22 +12,20 @@ export default class App extends Component {
    
    state = {
       todoData : [
-         this.createTodoItem('Completed task'),
-         this.createTodoItem('Editing task'),
-         this.createTodoItem('Active task')
+         this.createTodoItem('Изучить WebCore'),
+         this.createTodoItem('Изучить JSCore'),
+         this.createTodoItem('Изучить React&Redux')
       ], 
-      Itemfilter: 'all',
+      itemFilter: 'all',
    };
 
    deleteItem = (id) => {
       this.setState(({ todoData }) => {
          const idx = todoData.findIndex((el) => el.id === id)
-
          const newArray = [
             ...todoData.slice(0, idx), 
             ...todoData.slice(idx + 1)
          ];
-
          return {
             todoData: newArray
          }
@@ -93,13 +91,13 @@ export default class App extends Component {
     }
 
    onfilterTodos = (value) => {
-      this.setState({ Itemfilter: value });
+      this.setState({ itemFilter: value });
     };
 
 
    render() {
-      const { todoData, Itemfilter } = this.state;
-      const todos = this.onFilterItems(todoData, Itemfilter);
+      const { todoData, itemFilter } = this.state;
+      const todos = this.onFilterItems(todoData, itemFilter);
       
       return (
          <section className="todoapp">
@@ -114,7 +112,7 @@ export default class App extends Component {
                onClearCompleted={this.onClearCompleted}
                onfilterTodos={this.onfilterTodos}
                todos={todoData}
-               Itemfilter={Itemfilter}
+               itemfilter={itemFilter}
             />
          </section>
       );
