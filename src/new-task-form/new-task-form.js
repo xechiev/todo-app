@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './new-task-form.css';
 
 
 export default class NewTaskForm extends Component {
+
+  static propTypes = {
+    addItem: PropTypes.func.isRequired
+  }
 
   state = {
     label: ''
@@ -24,13 +29,14 @@ export default class NewTaskForm extends Component {
   };
 
   render() {
+    const { label } = this.state;
     return  (
       <form onSubmit={this.onSubmit}>
           <input 
             type="text"
             className="new-todo" 
             placeholder="What needs to be done?"
-            value={this.state.label}
+            value={label}
             onChange={this.onLableChange} 
           />
       </form>

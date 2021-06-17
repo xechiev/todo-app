@@ -1,5 +1,7 @@
 import React from 'react';
 import Task from '../task';
+import PropTypes from 'prop-types';
+
 import './task-list.css';
 
 const TaskList = ( {todos, onDeleted, onToggleDone} ) => {
@@ -14,7 +16,7 @@ const TaskList = ( {todos, onDeleted, onToggleDone} ) => {
                onDeleted={() => onDeleted(id)}
                onToggleDone={() => onToggleDone(id)}
                {... itemProps }
-               />
+            />
          </li>
       );
    })
@@ -24,6 +26,12 @@ const TaskList = ( {todos, onDeleted, onToggleDone} ) => {
          { elements }
       </ul>
    )
+};
+
+TaskList.propTypes = {
+  todos: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onDeleted: PropTypes.func.isRequired,
+  onToggleDone: PropTypes.func.isRequired,
 };
 
 export default TaskList;

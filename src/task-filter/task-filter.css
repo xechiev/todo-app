@@ -27,12 +27,9 @@
 }
 
 .filters li:hover button {
-	border-color: rgba(138, 9, 9, 0.377);
+	border-color: rgba(175, 47, 47, 0.1);
 }
 
 .filters li button.selected {
-	border-color: rgba(218, 13, 13, 0.712);
-}
-.done {
-	text-decoration: line-through;
+	border-color: rgba(175, 47, 47, 0.2);
 }

@@ -45,9 +45,10 @@ label {
 	color: inherit;
 	background-color: transparent;
 }
+
 .done {
-	text-decoration: line-through;
 	color: #cdcdcd;
+	text-decoration: line-through;
 }
 
 .icon {
