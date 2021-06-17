@@ -13,24 +13,12 @@ class App extends Component {
    
    state = {
       todoData : [
-         this.createTodoItem('Complated task'),
+         this.createTodoItem('Completed task'),
          this.createTodoItem('Editing task'),
          this.createTodoItem('Active task')
-      ],
-      checkedListAll: [],
-      itemsCheked: false
+      ], 
+      Itemfilter: 'all',
    };
-
-   createTodoItem(label) {
-      return {
-         label,
-         done: false,
-         id: this.maxId++,
-         checked: false,
-         view: false,
-         timeCreate: Date.now(),
-      }
-   }
 
    deleteItem = (id) => {
       this.setState(({ todoData }) => {
@@ -48,78 +36,34 @@ class App extends Component {
    };
    
    addItems = (text) => {
-      const newItem = this.createTodoItem(text);
+      if (!text.match(/^[ ]+$/) && text.length >= 1) {
+         const newItem = this.createTodoItem(text);
 
-      this.setState(({ todoData }) => {
-         const newArr = [
-            ...todoData,
-            newItem
-         ];
-
-         return {
-            todoData: newArr
-         }         
-      });
-   }
-
-   toggleProperty (arr, id, propName) {
-      const idx = arr.findIndex((el) => el.id === id);
-
-      const oldItem = arr[idx];
-      const newItem = {...oldItem, 
-         [propName]: !oldItem[propName]};
-
-      return [
-         ...arr.slice(0, idx), 
-         newItem,
-         ...arr.slice(idx + 1)
-      ];
-   }
+         this.setState(({ todoData }) => {
+            const newArr = [
+               ...todoData,
+               newItem
+            ];
+            return {
+               todoData: newArr
+            }         
+         });
+      };
+   };
 
    onToggleDone = (id) => {
       this.setState(({ todoData }) => {
+         const newArr = todoData.map((el) => {
+            if(el.id === id) {
+               el.done = !el.done
+            }
+            return el;
+         })
          return {
-            todoData: this.toggleProperty(todoData, id, 'done')
-         };
+            todoData: newArr
+         }
       });
    };
-
-   toggleFilter (arr, status)  {
-      const newArr = arr
-         for(let item of newArr) {
-            if(item.done === status) item.view = !item.view
-         }
-         return {
-            arr: newArr
-         }
-   }
-
-   onToggleAll = () => {
-      this.setState(({ todoData }) => {
-         const allItem = todoData.filter((el) => el.label);
-         return {
-            todoData: allItem
-         }
-      })
-   }
-
-   onToggleActive = () => {      
-      this.setState(({ todoData }) => {
-         return this.toggleFilter(todoData, true)
-      })
-   }
-
-   onToggleCompleted = () => {      
-      this.setState(({ todoData }) => {
-         return this.toggleFilter(todoData, false)
-      })
-   }
-   
-   // onToggleFilter = (onToggleAll, onToggleActive, onToggleCompleted) => {
-   //    this.setState(( { todoData }) => {
-   //       if(onToggleActive)
-   //    })
-   // }
 
    onClearCompleted = () => {
       this.setState(({ todoData }) => {
@@ -129,27 +73,49 @@ class App extends Component {
          }
       })
    }
-   onChangeItem = () => {
-      console.log("hello")
+
+   createTodoItem(label) {
+      return {
+         label,
+         done: false,
+         id: this.maxId++,
+         timeCreate: Date.now()
+      } 
    }
-    
+
+   onFilterItems(arr, filter) {
+      if (filter === 'all') {
+        return arr;
+      } else if (filter === 'active') {
+        return arr.filter((item) => (!item.done));
+      } else if (filter === 'completed') {
+        return arr.filter((item) => item.done);
+      }
+    }
+
+   onfilterTodos = (value) => {
+      this.setState({ Itemfilter: value });
+    };
+
+
    render() {
+      const { todoData, Itemfilter } = this.state;
+      const todos = this.onFilterItems(todoData, Itemfilter);
+      
+
       return (
          <section className="todoapp">
             <Header />
             <NewTaskForm addItems={this.addItems}/>
             <TaskList 
-               todos={this.state.todoData}
+               todos={todos}
                onDeleted={ this.deleteItem }
                onToggleDone={this.onToggleDone}
-               onChangeItem={this.onChangeItem}
             />
             <Footer 
-               onToggleAll={this.onToggleAll}
-               onToggleActive={this.onToggleActive}
-               onToggleCompleted={this.onToggleCompleted}
                onClearCompleted={this.onClearCompleted}
-               todos={this.state.todoData}
+               onfilterTodos={this.onfilterTodos}
+               todos={todoData}
             />
          </section>
       );

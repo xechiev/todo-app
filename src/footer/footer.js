@@ -6,7 +6,7 @@ import './footer.css';
 export default class Footer extends Component {
 
    render() {
-      const { onToggleAll, onToggleActive, onToggleCompleted, onClearCompleted, todos} = this.props
+      const { todos, onClearCompleted, onfilterTodos } = this.props
 
       const doneCount = todos.filter((el) => !el.done).length;
 
@@ -14,9 +14,7 @@ export default class Footer extends Component {
          <footer className="footer">
             <span className="todo-count">{doneCount} items left</span>
             <TaskFilter 
-               onToggleAll={() => onToggleAll()}
-               onToggleActive={() => onToggleActive()} 
-               onToggleCompleted={() => onToggleCompleted()}
+               onfilterTodos={onfilterTodos}
             />
             <button 
                className="clear-completed"

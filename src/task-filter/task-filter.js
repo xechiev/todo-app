@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './task-filter.css';
 
-export default class TaskFilter extends Component{
+ const TaskFilter = ({ onfilterTodos }) => {
    
-   render() {
-
-      const { onToggleActive, onToggleCompleted, onToggleAll} = this.props;
-
-      return (
-         <ul className="filters">
-            <li><button onClick={onToggleAll}>All</button></li>
-            <li><button onClick={onToggleActive}>Active</button></li>
-            <li><button onClick={onToggleCompleted}>Completed</button></li>
-         </ul>
-      );
-   }; 
+   const onFilter = (e) => {
+      const innerText = e.target.innerText.toLowerCase();
+      onfilterTodos(innerText);
+   }
+   return (
+      <ul className="filters">
+         <li><button  onClick={onFilter}>All</button></li>
+         <li><button  onClick={onFilter}>Active</button></li>
+         <li><button  onClick={onFilter}>Completed</button></li>
+      </ul>
+   );
 };
+
+export default TaskFilter;

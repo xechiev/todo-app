@@ -5,24 +5,19 @@ import './task.css';
 
 
 export default class Task extends Component {
-
     
-
-
    render() {
       
-      const { label, done, view, timeCreate, onDeleted, onToggleDone} = this.props;
+      const { label, done, timeCreate, onDeleted, onToggleDone} = this.props;
 
       const whenCreated = formatDistanceToNow(timeCreate, { includeSeconds: true });
 
       let className = 'description';
-      let classActive
-
-      if (done) { className += ' done' }
-      if (view) {classActive += ' active'}
-
+      
+      if (done) { className += ' done' };
+        
       return (
-         <div className={classActive} >
+         <div >
             <input className="toggle" 
                    type="checkbox" 
                    onClick={onToggleDone}

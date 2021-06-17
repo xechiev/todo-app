@@ -49,9 +49,6 @@ label {
 	text-decoration: line-through;
 	color: #cdcdcd;
 }
-.active {
-	display: none;
-} 
 
 .icon {
 	position: absolute;
