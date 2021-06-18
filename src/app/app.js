@@ -33,19 +33,16 @@ export default class App extends Component {
    };
    
    addItems = (text) => {
-      if (!text.match(/^[ ]+$/) && text.length >= 1) {
-         const newItem = this.createTodoItem(text);
-
-         this.setState(({ todoData }) => {
-            const newArr = [
-               ...todoData,
-               newItem
-            ];
-            return {
-               todoData: newArr
-            }         
-         });
-      };
+      const newItem = this.createTodoItem(text);
+      this.setState(({ todoData }) => {
+         const newArr = [
+            ...todoData,
+             newItem
+         ];
+         return {
+            todoData: newArr
+         }         
+      });
    };
 
    onToggleDone = (id) => {
@@ -117,4 +114,4 @@ export default class App extends Component {
          </section>
       );
    }  
-};
+}

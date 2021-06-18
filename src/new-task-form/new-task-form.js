@@ -7,13 +7,13 @@ import './new-task-form.css';
 export default class NewTaskForm extends Component {
 
   static propTypes = {
-    addItem: PropTypes.func.isRequired
+    addItems: PropTypes.func
   }
 
   state = {
     label: ''
   }
-
+  
   onLableChange = (e) => {
     this.setState( {
       label: e.target.value
@@ -22,11 +22,17 @@ export default class NewTaskForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.addItems(this.state.label);
-    this.setState({
-      label: ''
-    });
-  };
+    const { label } = this.state
+    const { addItems } = this.props;
+
+    if(label.trim()) {
+      addItems(label);
+      this.setState({
+        label: ''
+      })
+    }
+
+  }
 
   render() {
     const { label } = this.state;
@@ -40,6 +46,6 @@ export default class NewTaskForm extends Component {
             onChange={this.onLableChange} 
           />
       </form>
-    );
-  };  
-};
+    )
+  }  
+}

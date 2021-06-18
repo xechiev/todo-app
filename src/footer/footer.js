@@ -32,6 +32,6 @@ export default class Footer extends Component {
             </button>
          </footer>
       );
-   };
-};
+   }
+}
 
