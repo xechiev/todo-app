@@ -109,7 +109,7 @@ export default class App extends Component {
                onClearCompleted={this.onClearCompleted}
                onfilterTodos={this.onfilterTodos}
                todos={todoData}
-               itemfilter={itemFilter}
+               itemFilter={itemFilter}
             />
          </section>
       );
