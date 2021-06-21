@@ -12,7 +12,8 @@ const Footer = ({
   return (
     <footer className="footer">
       <span className="todo-count">
-        { doneCount }
+        {doneCount}
+        {' '}
         items left
       </span>
       <TaskFilter onfilterTodos={onfilterTodos} itemFilter={itemFilter} />
