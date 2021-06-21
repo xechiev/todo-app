@@ -1,31 +1,24 @@
 import React from 'react';
-import Task from '../task';
 import PropTypes from 'prop-types';
+import Task from '../task';
 
 import './task-list.css';
 
-const TaskList = ( {todos, onDeleted, onToggleDone} ) => {
+const TaskList = ({ todos, onDeleted, onToggleDone }) => {
+  const elements = todos.map((item) => {
+    const { id, ...itemProps } = item;
+    return (
+      <li key={id}>
+        <Task
+          onDeleted={() => onDeleted(id)}
+          onToggleDone={() => onToggleDone(id)}
+          {...itemProps}
+        />
+      </li>
+    );
+  });
 
-
-   const elements = todos.map((item) => {
-
-      const { id, ...itemProps } = item;
-         return (
-         <li key={id} > 
-            <Task  
-               onDeleted={() => onDeleted(id)}
-               onToggleDone={() => onToggleDone(id)}
-               {... itemProps }
-            />
-         </li>
-      );
-   })
-
-   return (
-      <ul className='todo-list'>
-         { elements }
-      </ul>
-   )
+  return <ul className="todo-list">{elements}</ul>;
 };
 
 TaskList.propTypes = {

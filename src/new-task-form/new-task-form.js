@@ -3,49 +3,46 @@ import PropTypes from 'prop-types';
 
 import './new-task-form.css';
 
-
 export default class NewTaskForm extends Component {
-
   static propTypes = {
-    addItems: PropTypes.func
-  }
+    addItems: PropTypes.func.isRequired,
+  };
 
   state = {
-    label: ''
-  }
-  
+    label: '',
+  };
+
   onLableChange = (e) => {
-    this.setState( {
-      label: e.target.value
-    })
-  }
+    this.setState({
+      label: e.target.value,
+    });
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
-    const { label } = this.state
+    const { label } = this.state;
     const { addItems } = this.props;
 
-    if(label.trim()) {
+    if (label.trim()) {
       addItems(label);
       this.setState({
-        label: ''
-      })
+        label: '',
+      });
     }
-
-  }
+  };
 
   render() {
     const { label } = this.state;
-    return  (
+    return (
       <form onSubmit={this.onSubmit}>
-          <input 
-            type="text"
-            className="new-todo" 
-            placeholder="What needs to be done?"
-            value={label}
-            onChange={this.onLableChange} 
-          />
+        <input
+          type="text"
+          className="new-todo"
+          placeholder="What needs to be done?"
+          value={label}
+          onChange={this.onLableChange}
+        />
       </form>
-    )
-  }  
+    );
+  }
 }
