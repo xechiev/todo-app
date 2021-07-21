@@ -21,13 +21,7 @@ export default function NewTaskForm({ addItems }) {
 
   return (
     <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        className="new-todo"
-        placeholder="What needs to be done?"
-        value={label}
-        onChange={onLableChange}
-      />
+      <input type="text" className="new-todo" placeholder="What needs to be done?" value={label} onChange={onLableChange} />
     </form>
   );
 }

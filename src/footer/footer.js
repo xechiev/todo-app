@@ -4,9 +4,7 @@ import TaskFilter from '../task-filter';
 
 import './footer.css';
 
-const Footer = ({
-  todos, itemFilter, onClearCompleted, onfilterTodos,
-}) => {
+const Footer = ({ todos, itemFilter, onClearCompleted, onfilterTodos }) => {
   const doneCount = todos.filter((el) => !el.done).length;
 
   return (

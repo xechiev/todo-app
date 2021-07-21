@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
 
 import './task.css';
 
-const Task = ({
-  label, done, timeCreate, onDeleted, onToggleDone,
-}) => {
+const Task = ({ label, done, timeCreate, onDeleted, onToggleDone }) => {
   const whenCreated = formatDistanceToNow(timeCreate, {
     includeSeconds: true,
   });
