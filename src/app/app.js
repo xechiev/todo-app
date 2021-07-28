@@ -14,11 +14,13 @@ export default function App() {
 
   let maxId = Date.now();
 
-  const createTodoItem = (label) => ({
+  const createTodoItem = (label, m, s) => ({
     label,
     done: false,
     id: maxId++,
     timeCreate: Date.now(),
+    min: +m,
+    sec: +s,
   });
 
   const onToggleDone = (id) => {
@@ -48,8 +50,8 @@ export default function App() {
     }
   };
 
-  const addItems = (text) => {
-    const newItem = createTodoItem(text);
+  const addItems = (text, m, s) => {
+    const newItem = createTodoItem(text, m, s);
     setState([...state, newItem]);
   };
 
@@ -67,8 +69,14 @@ export default function App() {
   return (
     <section className="todoapp">
       <Header />
-      <NewTaskForm addItems={addItems} />
-      <TaskList todos={todos} onDeleted={deleteItem} onToggleDone={onToggleDone} />
+      <NewTaskForm 
+        addItems={addItems} 
+      />
+      <TaskList 
+        todos={todos} 
+        onDeleted={deleteItem} 
+        onToggleDone={onToggleDone} 
+      />
       <Footer
         onClearCompleted={onClearCompleted}
         onfilterTodos={onfilterTodos}

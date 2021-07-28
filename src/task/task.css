@@ -26,9 +26,15 @@ label {
   padding: 15px 85px 15px 60px;
   margin-bottom: 0;
 }
-.created {
+.created,
+.timer {
   font-size: 13px;
   color: gray;
+}
+.timer {
+  position: absolute;
+  right: 50%;
+  margin: auto 0;
 }
 .description {
   word-break: break-all;
@@ -58,7 +64,7 @@ label {
   height: 40px;
   font-size: 34px;
   color: #cc9a9a;
-  margin: auto 0 11px;
+  margin: auto 0;
   transition: color 0.2s ease-out;
   cursor: pointer;
 }
@@ -80,4 +86,26 @@ label {
 
 .icon-edit:after {
   content: '✎';
+}
+.icon-pause,
+.icon-play {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  bottom: 2px;
+}
+.icon-pause {
+  position: absolute;
+  left: 40%;
+}
+.icon-play {
+  position: absolute;
+  left: 36%;
+}
+.icon-pause:after {
+  content: '⏸';
+}
+
+.icon-play:after {
+  content: '▶';
 }
