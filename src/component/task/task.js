@@ -13,7 +13,7 @@ const Task = ({ label, done, timeCreate, onDeleted, onToggleDone, sec }) => {
   // const [seconds, setSeconds] = useState(sec % 60);
   // const [minutes, setMinutes] = useState(Math.floor(sec / 60))
 
-  function addZero(x) {
+  const addZero = (x) => {
     return x < 10 ? '0' + x : x
   }
 
