@@ -7,37 +7,34 @@ import PropTypes from 'prop-types';
 
 import './task.css';
 
-const Task = ({ label, done, timeCreate, onDeleted, onToggleDone, min, sec }) => {
+const Task = ({ label, done, timeCreate, onDeleted, onToggleDone, sec }) => {
   const [isPlaying, setPlaying] = useState(false);
-  const [minutes, setMinutes] = useState(min);
-  const [seconds, setSeconds] = useState(sec);
+  const [counter, setCounter] = useState(sec);
+  // const [seconds, setSeconds] = useState(sec % 60);
+  // const [minutes, setMinutes] = useState(Math.floor(sec / 60))
 
   function addZero(x) {
     return x < 10 ? '0' + x : x
+  }
+
+  const formatTimer = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${addZero(minutes)}:${addZero(seconds)}`;
   }
 
   useEffect(() => {
     let interval = null;
 
     if (isPlaying) {
-      interval = setInterval(() => {
-        if (seconds > 0) {
-          setSeconds(seconds - 1);
-        }
-        if (seconds === 0) {
-          if (minutes === 0 || minutes === undefined) {
-              clearInterval(interval)
-          } else {
-              setMinutes(minutes - 1);
-              setSeconds(59);
-          }
-        } 
-      }, 1000)
-    } else {
+      if (counter > 0) {
+        interval = setTimeout(() => setCounter(prevState => prevState - 1), 1000);
+      } else {
       clearInterval(interval)
     }
     return () => clearInterval(interval)
-  })
+    }
+  }, [counter, isPlaying])
 
   const whenCreated = formatDistanceToNow(timeCreate, {
     includeSeconds: true,
@@ -55,9 +52,7 @@ const Task = ({ label, done, timeCreate, onDeleted, onToggleDone, min, sec }) =>
         <button className="icon icon-play" type="button" onClick={() => setPlaying(true)} />
         <button className="icon icon-pause" type="button" onClick={() => setPlaying(false)} />
         <p className="timer">
-          {addZero(minutes)}
-          :
-          {addZero(seconds)}
+          {counter === 0 ? 'end' : formatTimer(counter)}
         </p>
         <span className="created">
           created
@@ -74,7 +69,6 @@ const Task = ({ label, done, timeCreate, onDeleted, onToggleDone, min, sec }) =>
 };
 
 Task.defaultProps = {
-  min: 20,
   sec: 0,
 };
 
@@ -84,7 +78,6 @@ Task.propTypes = {
   timeCreate: PropTypes.number.isRequired,
   onDeleted: PropTypes.func.isRequired,
   onToggleDone: PropTypes.func.isRequired,
-  min: PropTypes.number,
   sec: PropTypes.number,
 };
 

@@ -19,8 +19,7 @@ export default function App() {
     done: false,
     id: maxId++,
     timeCreate: Date.now(),
-    min: +m,
-    sec: +s,
+    sec: +s + (m * 60),
   });
 
   const onToggleDone = (id) => {

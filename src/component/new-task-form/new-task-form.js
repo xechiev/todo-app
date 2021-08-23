@@ -26,7 +26,7 @@ export default function NewTaskForm({ addItems }) {
     setSecd(e.target.value)
   }
 
-  const onSubmit = () => {    
+  const onSubmit = () => {  
     if (label.trim()) {
       addItems(label, mint, secd);
       setLabel('');
